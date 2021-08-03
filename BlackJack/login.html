@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #change{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="loginpage">
+        <h1>Login</h1>
+        <form id = "login">
+            <input type="text" name="username"  id="username" placeholder="Username">
+            <input type="password" name="password" id="password" placeholder="Password">
+            <button type="submit" id="submit">Login</button>
+        </form>
+        <a id = 'change' href="/change">Change password</a>
+        <br>
+        <a href="/">Back Home</a>
+        <br>
+    </div>
+    <script>
+        const form = document.getElementById("login");
+        let okButton = 0;
+        form.addEventListener('submit',async (event)=>{
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const result = await fetch('/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username,
+                    password
+                })
+            }).then((res)=>res.json());
+            if(result.status === 'ok'){
+                localStorage.setItem('token',result.data);
+                let goToGame = document.createElement('a');
+                goToGame.innerText = 'Go to game';
+                goToGame.href = '/Blackjack';
+                let body = document.getElementById('loginpage');
+                if(!okButton){
+                    body.appendChild(goToGame);
+                    okButton = 1;
+                }
+                alert("Logged in, you can go to game");
+                let cp = document.getElementById('change');
+                cp.style.display='inline';
+            }
+            else
+                alert(result.error);
+        });
+        
+
+    </script>
+</body>
+</html>

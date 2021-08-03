@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Change password</h1>
+    <form id = "change-pass">
+        <input type="password" name="password" id="password" placeholder="New password">
+        <button type="submit" id="submit">Change</button>
+    </form>
+    <a href="/">Back Home</a>
+    <script>
+        const form = document.getElementById("change-pass");
+        form.addEventListener('submit',async (event)=>{
+            event.preventDefault();
+            const password = document.getElementById('password').value;
+
+            const result = await fetch('/api/change', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    newPass:password,
+                    token: localStorage.getItem('token')
+                })
+            }).then((res)=>res.json());
+            if(result.status === 'ok'){
+                alert("Success");
+            }
+            
+            else
+                alert(result.error);
+            console.log(result);
+        });
+        
+
+    </script>
+</body>
+</html>

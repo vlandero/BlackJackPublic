@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BlackJack21</title>
+    <link rel="stylesheet" href="./public/style.css">
+</head>
+<body id="bdy">
+    <header>
+        <div class="navbar">
+            <div class="back-button">
+                <a href="/" id="backlink">&#8592Back</a>
+            </div>
+            <ul id="bjbutton">
+                <li id="bjdropdown">
+                    <h1 id="game-info"><span id="black">Black</span><span id="jack">Jack</span><span id="downarrow">&#8681;</span></h1>
+                    <div id="dropdown">
+                        <ul>
+                            <li id="user">User</li>
+                            <li id="money">Money</li>
+                            <li data-modal-target="#modal" id="leaderboard">Leaderboard</li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <div class="game-screen">
+        <div class="game">
+            <div class="bot-game" id="bot-game">
+                
+            </div>
+            <div class="user-game">
+                <div class="deck">
+                    <img src="./public/photos/PNG/blue_back.png" id="image" alt="">
+                    <p id="availableCards">52</p>
+                </div>
+                <div class="table" id="table">
+                    <div id="cards" class="cards">  
+                    </div>
+                    <button id="start-game" data-modal-target="#modal1">Start game</button>
+                    <div class="buttons">
+                        <button class="hiddenButtons" id="hold" onclick="hold()">Hold</button>
+                        <button class="hiddenButtons" id="risk" onclick="drawCard(currentCards)">Risk</button>
+                    </div>
+                    <h2>Current: <span id="score">0</span></h2>
+                    <button id="play-again" data-modal-target="#modal1">Play again</button>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="modal" id="modal">
+        <div class="modal-header">
+            <div class="title">Leaderboard</div>
+            <button data-close-button class="close-button">&times;</button>
+        </div>
+        <div class="modal-body" id="leaderboard-modal">
+        </div>
+    </div>
+    <div class="modal" id="modal1">
+        <div class="modal-header">
+            <div class="title" id="selectBet">Select bet</div>
+            <button data-close-button class="close-button">&times;</button>
+        </div>
+        <div class="modal-body">
+            <h2>Money to bet</h2>
+            Current balance: <span id="crtBal"></span>
+            <br>
+            <button id="all-in">All-in</button>
+            <form id="bet">
+                <input type="text" name="moneyToBet" id="moneyToBet" placeholder="Ron">
+                <h2>Multiplier</h2>
+                <p>
+                    1-100k ron -> x2
+                    <br>
+                    100k+ ron -> x3
+                    <br>
+                    If you tie, you win nothing.
+                    <br>
+                    If you hit 21, you win 2x more than you normally would
+                </p>
+                <br>
+                <button type="submit" id="submit">Let's go!</button>
+            </form>
+            <p id="nomoney">No money? Get 5 ron for free</p>
+            <button id="get-money">Get 5 ron</button>
+        </div>
+    </div>
+    <div id = "overlay"></div>
+    <script src="./public/script.js"></script>
+</body>
+</html>
